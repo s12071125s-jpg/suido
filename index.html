@@ -30,7 +30,7 @@
 
   .nav {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-x: auto;
     background: white;
     border-bottom: 2px solid #e2e8f0;
@@ -39,6 +39,9 @@
     top: 0;
     z-index: 100;
     scrollbar-width: none;
+  }
+  @media (min-width: 600px) {
+    .nav { justify-content: center; }
   }
   .nav::-webkit-scrollbar { display: none; }
   .nav-btn {
