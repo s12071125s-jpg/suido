@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上田市の水道、これからどうなるの？</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+    background: #f0f4f8;
+    color: #1a2332;
+    line-height: 1.7;
+  }
+  .hero {
+    background: linear-gradient(135deg, #0f4c81 0%, #1a6eb5 50%, #2389d4 100%);
+    color: white;
+    padding: 48px 32px 40px;
+    text-align: center;
+  }
+  .hero-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+  }
+  .hero h1 { font-size: 26px; font-weight: 900; line-height: 1.3; margin-bottom: 16px; }
+  .hero-sub { font-size: 14px; color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto; }
+
+  .nav {
+    display: flex;
+    overflow-x: auto;
+    background: white;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 0 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 14px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #64748b;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .nav-btn.active { color: #0f4c81; border-bottom-color: #0f4c81; }
+  .nav-btn:hover { color: #0f4c81; }
+
+  .content { max-width: 700px; margin: 0 auto; padding: 24px 16px 48px; }
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f4c81;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .icon {
+    width: 30px; height: 30px;
+    background: #e8f2fc;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  p { font-size: 14px; color: #374151; margin-bottom: 10px; }
+  p:last-child { margin-bottom: 0; }
+  h3 { font-size: 15px; font-weight: 700; color: #1a2332; margin: 16px 0 8px; }
+  h3:first-child { margin-top: 0; }
+
+  .highlight {
+    background: #fef9e7;
+    border-left: 4px solid #f59e0b;
+    padding: 14px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #374151;
+    margin: 12px 0;
+  }
+  .info-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #1e40af;
+    margin: 12px 0;
+  }
+  .warn-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #991b1b;
+    margin: 12px 0;
+  }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  .compare-table th { background: #0f4c81; color: white; padding: 10px 12px; text-align: left; font-weight: 700; }
+  .compare-table td { padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: #f8fafc; }
+  .compare-table tr:last-child td { border-bottom: none; }
+
+  .area-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .area-item { background: #f8fafc; border-radius: 8px; padding: 14px; border: 1px solid #e2e8f0; }
+  .area-name { font-size: 14px; font-weight: 700; color: #0f4c81; margin-bottom: 6px; }
+  .area-info { font-size: 12px; color: #64748b; line-height: 1.6; }
+
+  .step-list { margin: 12px 0; }
+  .step { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+  .step-num {
+    width: 28px; height: 28px;
+    background: #0f4c81; color: white;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-body strong { font-size: 14px; color: #1a2332; display: block; margin-bottom: 4px; }
+  .step-body span { font-size: 13px; color: #64748b; }
+
+  .timeline { position: relative; padding-left: 24px; margin: 12px 0; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 0; bottom: 0;
+    width: 2px; background: #bfdbfe;
+  }
+  .tl-item { position: relative; margin-bottom: 16px; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -21px; top: 5px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #0f4c81;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #bfdbfe;
+  }
+  .tl-date { font-size: 11px; font-weight: 700; color: #0f4c81; margin-bottom: 3px; }
+  .tl-text { font-size: 13px; color: #374151; }
+
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .summary-item {
+    background: white; border-radius: 10px; padding: 16px;
+    border-top: 4px solid #0f4c81;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .summary-item.warn { border-top-color: #ef4444; }
+  .summary-item.ok { border-top-color: #10b981; }
+  .summary-item.neutral { border-top-color: #f59e0b; }
+  .summary-label { font-size: 11px; font-weight: 700; color: #64748b; margin-bottom: 8px; letter-spacing: 1px; }
+  .summary-value { font-size: 13px; color: #1a2332; font-weight: 500; line-height: 1.5; }
+
+  .badge-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .tag-green { background: #d1fae5; color: #065f46; }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">上田市民のための解説</div>
+  <h1>上田市の水道、これから<br>どうなるの？</h1>
+  <p class="hero-sub">広域化・浄水場・市長選の争点まで、わかりやすくまとめました</p>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="show('s1',this)">① なぜ問題？</button>
+  <button class="nav-btn" onclick="show('s2',this)">② 水道の現状</button>
+  <button class="nav-btn" onclick="show('s3',this)">③ 広域化とは</button>
+  <button class="nav-btn" onclick="show('s4',this)">④ 前市長vs現市長</button>
+  <button class="nav-btn" onclick="show('s5',this)">⑤ 上田の強み</button>
+  <button class="nav-btn" onclick="show('s6',this)">⑥ 今後の焦点</button>
+</div>
+
+<div class="content">
+
+  <!-- Section 1 -->
+  <div id="s1" class="section active">
+    <div class="card">
+      <div class="card-title"><div class="icon">⚠️</div>3つの危機が同時に起きている</div>
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>人口が減り続けている</strong>
+            <span>水を使う人が減ると料金収入が減る。でも管路や施設の維持費は変わらない。1人あたりの負担が増え続ける構造。</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>設備が老朽化している</strong>
+            <span>約1,000kmの水道管の多くが老朽化。染屋浄水場は大正12年（1923年）築で100年超。耐震改修も必要。</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>専門人材が足りない</strong>
+            <span>水道の専門技術者が全国的に不足。上田市単独では退職者が出たとき後継者を確保しにくくなっている。</span>
+          </div>
+        </div>
+      </div>
+      <div class="warn-box">これら3つの問題を上田市だけで解決し続けるのは、財政的にも人材的にも限界に近づいています。</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">💧</div>上田市の水道、基本データ</div>
+      <div class="area-grid">
+        <div class="area-item">
+          <div class="area-name">水道管の総延長</div>
+          <div class="area-info">約1,000km<br>老朽化した管の更新が急務</div>
+        </div>
+        <div class="area-item">
+          <div class="area-name">水源の数</div>
+          <div class="area-info">28か所<br>川・湧水・地下水など多様</div>
+        </div>
+        <div class="area-item">
+          <div class="area-name">1日の給水量</div>
+          <div class="area-info">約4万7千トン<br>市内13万5千人に供給</div>
+        </div>
+        <div class="area-item">
+          <div class="area-name">主な浄水場</div>
+          <div class="area-info">染屋・石舟・腰越・<br>鹿教湯など複数</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div id="s2" class="section">
+    <div class="card">
+      <div class="card-title"><div class="icon">🗺️</div>4地域それぞれに異なる水道</div>
+      <p>上田市は2006年に上田市・丸子町・真田町・武石村が合併。もともと別々の水道事業を持っていたため、地域ごとに水源・浄水方法が違います。</p>
+      <div class="area-grid">
+        <div class="area-item">
+          <div class="area-name">🏙️ 上田地域</div>
+          <div class="area-info">浄水場：染屋・石舟<br>水源：神川・千曲川<br>方式：<strong>緩速ろ過</strong>（希少）</div>
+        </div>
+        <div class="area-item">
+          <div class="area-name">🏔️ 丸子地域</div>
+          <div class="area-info">浄水場：腰越・鹿教湯<br>水源：依田川<br>方式：通常の処理</div>
+        </div>
+        <div class="area-item">
+          <div class="area-name">🌿 真田地域</div>
+          <div class="area-info">水源：湧水・地下水<br>給水人口：約9,500人<br>浄水処理がほぼ不要</div>
+        </div>
+        <div class="area-item">
+          <div class="area-name">🏞️ 武石地域</div>
+          <div class="area-info">水源：湧水・地下水<br>給水人口：約3,200人<br>塩素消毒のみでOK</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">🏭</div>染屋浄水場が特別な理由</div>
+      <p><strong>「緩速ろ過」</strong>という方式を採用。日本全国でも給水量のわずか5%しか使っていない希少な方式です。</p>
+      <table class="compare-table">
+        <tr><th>比較項目</th><th>緩速ろ過（染屋）</th><th>急速ろ過（一般的）</th></tr>
+        <tr><td>浄化の仕組み</td><td>微生物による自然浄化</td><td>薬品＋機械的ろ過</td></tr>
+        <tr><td>薬品使用</td><td>ほぼ不要</td><td>凝集剤など必要</td></tr>
+        <tr><td>水のおいしさ</td><td>高評価（カルキ臭少）</td><td>薬品臭が残りやすい</td></tr>
+        <tr><td>全国での割合</td><td>給水量の約5%</td><td>約95%</td></tr>
+      </table>
+      <div class="info-box">大正12年（1923年）築で100年以上現役。名古屋市のサイトでも「日本でも珍しい規模の大きい緩速ろ過施設」として特筆されています。</div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div id="s3" class="section">
+    <div class="card">
+      <div class="card-title"><div class="icon">🤝</div>広域化とは何か</div>
+      <p>長野市・上田市・千曲市・坂城町・長野県企業局の5者が水道事業を統合し、<strong>「企業団」</strong>（特別地方公共団体）を新しく設立する計画です。</p>
+      <div class="highlight"><strong>民営化ではありません。</strong>公営を維持したまま5者が共同運営することで、効率化・コスト削減を目指すものです。</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">📅</div>これまでの経緯</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">令和3年（2021年）</div>
+          <div class="tl-text">国（厚生労働省）が施設最適配置計画を提示。広域化の検討が始まる。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">令和6年4月（2024年）</div>
+          <div class="tl-text">「上田長野地域水道事業広域化協議会」を5者で正式設立。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">令和7年11月（2025年）</div>
+          <div class="tl-text">基本計画を正式決定。企業団設立に向けた具体的な事業計画の検討へ。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">令和8年3月（2026年）</div>
+          <div class="tl-text">上田市長選。広域化反対を掲げた斉藤達也氏が現職を破り当選。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">令和8年5月（2026年）</div>
+          <div class="tl-text">第7回協議会に斉藤市長が初参加。副会長に就任。事業計画（案）の中間報告。</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">❓</div>広域化すると何が変わる？</div>
+      <h3>メリット</h3>
+      <div class="badge-row">
+        <span class="tag tag-green">コスト分担</span>
+        <span class="tag tag-green">人材共有</span>
+        <span class="tag tag-green">料金上昇の抑制</span>
+        <span class="tag tag-green">非常時の水融通</span>
+      </div>
+      <p>5者で費用を分担できるため、単独で維持するより将来的な水道料金の上昇が抑えられる可能性があります。また災害時に他の地域から水を融通し合えます。</p>
+      <h3>懸念点</h3>
+      <div class="badge-row">
+        <span class="tag tag-red">発言力の低下</span>
+        <span class="tag tag-red">料金統一のリスク</span>
+        <span class="tag tag-red">施設の統廃合</span>
+      </div>
+      <p>企業団の意思決定は議会の多数決。給水人口の大きい長野市の影響力が強くなります。上田市独自の判断ができなくなるリスクがあります。</p>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div id="s4" class="section">
+    <div class="card">
+      <div class="card-title"><div class="icon">⚖️</div>前市長と現市長、何が違うか</div>
+      <table class="compare-table">
+        <tr><th>論点</th><th>土屋前市長</th><th>斉藤現市長</th></tr>
+        <tr><td>基本姿勢</td><td>広域化を推進</td><td>条件の精査が先</td></tr>
+        <tr><td>資産評価</td><td>水道事業にはなじまないと否定</td><td>出資比率決定に必須と主張</td></tr>
+        <tr><td>単独シミュ</td><td>広域化前提の試算を公表</td><td>単独継続前提の試算も必要</td></tr>
+        <tr><td>メリット</td><td>事業計画の中でこれから明確化</td><td>統合前に明確化すべき</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">🔍</div>「資産評価」とは何のためか</div>
+      <p>企業団を設立するとき、各自治体がどれだけ資産を「出資」したかで<strong>議決権の割合（出資比率）</strong>が決まります。</p>
+      <div class="highlight">
+        <strong>評価が低ければ→上田市の議決権が小さくなる</strong><br>
+        水をどこに送るか、施設をどこから整備するか、料金をいくらにするか。すべて議決権の多い自治体が決める力を持ちます。
+      </div>
+      <p>斉藤市長は「染屋浄水場・良質な湧水・地下水の価値をきちんと数字にして出資比率に反映させるべき」と主張しています。</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">🎯</div>「反対」から「条件交渉」へ</div>
+      <p>選挙では「現状の広域化に反対」を掲げた斉藤市長ですが、就任後は協議会の副会長に就任し、協議に参加しています。</p>
+      <div class="info-box">現実的な着地点は「広域化の条件をいかに上田市に有利にするか」という交渉になると見られています。人口減少・老朽化・人材不足という三重苦を上田市単独で解決する財政的見通しは立たないためです。</div>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div id="s5" class="section">
+    <div class="card">
+      <div class="card-title"><div class="icon">💪</div>上田市が持つ「交渉カード」</div>
+      <h3>① 良質な水源</h3>
+      <p>真田・武石地域の湧水・地下水は浄水処理が不要なほど良質。<strong>つちや水源・滝の入水源</strong>など固有名詞で語られる優れた水源を複数保有しています。帳簿にはほぼ載っていない「自然の恵み」ですが、代替コストで評価すると非常に大きな価値があります。</p>
+      <h3>② 染屋浄水場の希少性</h3>
+      <p>全国でも珍しい大規模緩速ろ過施設。薬品不要・良質な水を大量供給できるのは、この地域では上田だけです。</p>
+      <h3>③ 上流という地理的優位</h3>
+      <p>千曲川・神川の上流に位置するため、水質が下流の長野市より本質的に優れています。「上田の水を長野に送る」構図になれば、上田市は<strong>「提供する側」</strong>として発言力を高められます。</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">🌊</div>上田の水が長野市に届く可能性</div>
+      <p>広域ネットワーク化により、高低差を活用した自然流下で上田の水を長野方向へ送ることは技術的に可能です。</p>
+      <div class="highlight">
+        <strong>長野市民にとってもメリット：</strong>薬品不要の良質な水が供給される可能性があります。これを逆手に取れば、「うちの水を供給する代わりに」という交渉軸で、施設整備の優先順位や料金条件を引き出せます。
+      </div>
+      <div class="warn-box">一方で、企業団に統合されると水利権も企業団に移転し、「上田の水をどこに送るか」は企業団議会が決めることになります。だからこそ出資比率・議決権が重要です。</div>
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div id="s6" class="section">
+    <div class="card">
+      <div class="card-title"><div class="icon">🔑</div>これからの3つの焦点</div>
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <strong>出資比率・財源負担の決定</strong>
+            <span>染屋浄水場・良質水源の評価をどう数字にし、企業団内での上田市の議決権をどれだけ確保できるか。これが最大の交渉事項です。</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <strong>施設整備の優先順位</strong>
+            <span>上田市内の老朽管路・浄水場の更新をいつ・誰の費用で行うか。企業団負担で早期実施させられれば上田市民の負担が減ります。</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <strong>水道料金の統一スケジュール</strong>
+            <span>現在各市で異なる料金をいつ統一するか。上田市民への負担増を緩和する条件を交渉で確保できるかが焦点です。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><div class="icon">📌</div>全体のまとめ</div>
+      <div class="summary-grid">
+        <div class="summary-item warn">
+          <div class="summary-label">避けられない現実</div>
+          <div class="summary-value">人口減少＋老朽化＋人材不足。単独維持は財政的に限界に近い。</div>
+        </div>
+        <div class="summary-item ok">
+          <div class="summary-label">上田市の強み</div>
+          <div class="summary-value">良質な湧水・地下水源、希少な緩速ろ過施設、千曲川上流という地理的優位。</div>
+        </div>
+        <div class="summary-item neutral">
+          <div class="summary-label">今の争点</div>
+          <div class="summary-value">広域化するかどうかではなく、どんな条件で統合するかの交渉。</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-label">市民が注目すべき点</div>
+          <div class="summary-value">出資比率・料金統一・施設整備の優先順位。これが将来の水道料金を左右する。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
