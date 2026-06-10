@@ -34,19 +34,19 @@
     overflow-x: auto;
     background: white;
     border-bottom: 2px solid #e2e8f0;
-    padding: 0 16px;
+    padding: 0;
     position: sticky;
     top: 0;
     z-index: 100;
     scrollbar-width: none;
   }
-  @media (min-width: 600px) {
+  @media (min-width: 700px) {
     .nav { justify-content: center; }
   }
   .nav::-webkit-scrollbar { display: none; }
   .nav-btn {
     flex-shrink: 0;
-    padding: 14px 14px;
+    padding: 14px 12px;
     font-size: 12px;
     font-weight: 700;
     color: #64748b;
@@ -58,6 +58,8 @@
     white-space: nowrap;
     font-family: inherit;
   }
+  .nav-btn:first-child { padding-left: 16px; }
+  .nav-btn:last-child { padding-right: 16px; }
   .nav-btn.active { color: #0f4c81; border-bottom-color: #0f4c81; }
   .nav-btn:hover { color: #0f4c81; }
 
